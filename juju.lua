@@ -1,10 +1,4 @@
-if not LPH_OBFUSCATED then
-	getfenv().LPH_NO_VIRTUALIZE = function(...) return ... end
-	getfenv().LPH_NO_UPVALUES = function(...) return ... end
-	getfenv().LPH_JIT_MAX = function(...) return ... end
-	getfenv().LPH_ENCSTR = function(...) return ... end
-	getfenv().LPH_JIT = function(...) return ... end
-end
+
 
 if getgenv().unload_juju then
 	getgenv().unload_juju()
@@ -20,7 +14,7 @@ end
 local is_solara = hookmetamethod == nil or getgenv().Xeno
 
 if not is_solara then
-	loadstring(LPH_ENCSTR([[
+	loadstring(LPH_ENCSTR([
 		for _, func in getconnections(game:GetService("ScriptContext").Error) do
 			if func.Function then
 				hookfunction(func.Function, function() end)
@@ -103,7 +97,7 @@ if not is_solara then
 			end;
 
 			if count < 2 then
-				game:GetService("Players")["LocalPlayer"]:Kick("juju > anticheat has updated, please wait for an update. this is for your safety <3 (TC)")
+				game:GetService("Players")["LocalPlayer"]:warn("juju > anticheat has updated, please wait for an update. this is for your safety <3 (TC)")
 				return
 			end
 
@@ -114,13 +108,13 @@ if not is_solara then
 	task.wait(1)
 
 	if not getgenv().done then
-		game:GetService("Players")["LocalPlayer"]:Kick("juju > anticheat has updated, please wait for an update. this is for your safety <3 (D)")
+		game:GetService("Players")["LocalPlayer"]:warn("juju > anticheat has updated, please wait for an update. this is for your safety <3 (D)")
 		return
 	end
 end
 
 if is_solara then
-	game:GetService("Players")["LocalPlayer"]:Kick("Your executor is not supported.")
+	game:GetService("Players")["LocalPlayer"]:warn("Your executor is not supported.")
 	return
 end
 
